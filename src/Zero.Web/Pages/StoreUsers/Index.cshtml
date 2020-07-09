@@ -1,0 +1,87 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Zero.Permissions
+@using Zero.Web.Pages.StoreUsers
+@using Zero.Web.Menus
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Zero.Localization
+@inject IHtmlLocalizer<ZeroResource> L
+@inject IAuthorizationService Authorization
+@model IndexModel
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["StoreUsers"].Value;
+    PageLayout.Content.MenuItemName = ZeroMenus.StoreUsers;
+}
+
+@section scripts
+{
+    <abp-script src="/Pages/StoreUsers/index.js" />
+}
+
+@section content_toolbar {
+    @if (await Authorization.IsGrantedAsync(ZeroPermissions.StoreUsers.Create))
+    {
+        <abp-button id="NewStoreUserButton"
+                    text="@L["NewStoreUser"].Value"
+                    icon="plus"
+                    button-type="Primary" />
+    }
+}
+
+<abp-card>
+    <abp-card-body>
+		<abp-row class="mb-3">
+            <abp-column size-md="_12">
+                <form id="SearchForm" autocomplete="off">
+                    <div class="input-group">
+                        <input class="form-control" id="FilterText" placeholder="@L["Search"]"/>
+                        <div class="input-group-append">
+                            <abp-button button-type="Primary" type="submit" icon="search"/>
+                        </div>
+                    </div>
+                </form>
+            </abp-column>
+            <abp-column size-md="_12" class="mt-3">
+                <a href="javascript:;" id="AdvancedFilterSectionToggler">@L["SeeAdvancedFilters"]</a>
+            </abp-column>
+        </abp-row>
+        <abp-row id="AdvancedFilterSection" style="display: none;">
+                <abp-column size="_3">
+                    <abp-input asp-for="DescFilter" label="@L["Desc"].Value" />
+                </abp-column>
+                <abp-column size="_3">
+                    <abp-select asp-for="IsActiveFilter" label="@L["IsActive"].Value" />
+                </abp-column>
+                <abp-column size="_3">
+                    <abp-select asp-for="StoreIdFilter" label="@L["Store"].Value" />
+                </abp-column>
+                <abp-column size="_3">
+                    <label for="AppUser_Filter_Email">@L["AppUser"]</label>
+                    <div class="input-group mb-3">
+                        <input hidden id="AppUserIdFilter" />
+                        <input type="text" id="AppUser_Filter_Email" class="form-control" disabled>
+                        <div class="input-group-append">
+                            <abp-button button-type="Info" id="AppUserFilterLookupOpenButton">@L["Pick"]</abp-button>
+                            <abp-button button-type="Danger" class="lookupCleanButton"><i class="fa fa-times"></i></abp-button>
+                        </div>
+                    </div>
+                </abp-column>
+
+        </abp-row>
+        <abp-table striped-rows="true" id="StoreUsersTable">
+            <thead>
+				<tr>
+					<th>@L["Actions"]</th>
+					<th>@L["Desc"]</th>
+					<th>@L["IsActive"]</th>
+
+					<th>@L["Store"]</th>
+					<th>@L["AppUser"]</th>
+
+				</tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>

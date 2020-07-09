@@ -1,0 +1,36 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Zero.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@using Zero.StoreUsers;
+@using System.Globalization
+@inject IHtmlLocalizer<ZeroResource> L
+@model  Zero.Web.Pages.StoreUsers.CreateModalModel
+@{
+    Layout = null;
+}
+<form data-ajaxForm="true" asp-page="/StoreUsers/CreateModal" autocomplete="off">
+    <abp-modal>
+        <abp-modal-header title="@L["NewStoreUser"].Value"></abp-modal-header>
+
+        <abp-modal-body>
+            
+            <abp-input asp-for="StoreUser.Desc"/>
+
+            <abp-input asp-for="StoreUser.IsActive"/>
+
+                        <abp-select asp-for="StoreUser.StoreId" asp-items="Model.StoreLookupList" label="@L["Store"].Value"/>
+            <label for="AppUser_Email">@L["AppUser"]</label>
+            <div class="input-group mb-3">
+                <input hidden value="@Model.StoreUser.AppUserId" id="AppUser_Id" name="StoreUser.AppUserId" />
+                <input type="text" id="AppUser_Email" class="form-control" disabled>
+                <div class="input-group-append">
+                    <abp-button button-type="Info" id="AppUserLookupOpenButton">@L["Pick"]</abp-button>
+                    <abp-button button-type="Danger" class="lookupCleanButton"><i class="fa fa-times"></i></abp-button>
+                </div>
+            </div>
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

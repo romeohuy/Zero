@@ -1,0 +1,29 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Zero.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@using Zero.Stores;
+@using System.Globalization
+@inject IHtmlLocalizer<ZeroResource> L
+@model  Zero.Web.Pages.Stores.CreateModalModel
+@{
+    Layout = null;
+}
+<form data-ajaxForm="true" asp-page="/Stores/CreateModal" autocomplete="off">
+    <abp-modal>
+        <abp-modal-header title="@L["NewStore"].Value"></abp-modal-header>
+
+        <abp-modal-body>
+            
+            <abp-input asp-for="Store.Name"/>
+
+            <abp-input asp-for="Store.Url"/>
+
+            <abp-input asp-for="Store.IsActive"/>
+
+            
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>Zero.Web</RootNamespace>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Autofac" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OAuth" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.LeptonTheme.Management.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.IdentityServer.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Saas.Host.Web" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton" Version="3.0.3" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Web" Version="3.0.3" />
+    <ProjectReference Include="..\Zero.HttpApi\Zero.HttpApi.csproj" />
+    <ProjectReference Include="..\Zero.HttpApi.Client\Zero.HttpApi.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\**\*.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pages\**\*.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Themes\**\*.css" />
+    <EmbeddedResource Include="Themes\**\*.js" />
+    <Content Remove="Themes\**\*.css" />
+    <Content Remove="Themes\**\*.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Stores\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,29 @@
+﻿@page
+@inherits Zero.Web.Pages.ZeroPage
+@model Zero.Web.Pages.IndexModel
+<abp-card>
+    <abp-card-header>@L["Welcome"]</abp-card-header>
+    <abp-card-body>
+        <p>@L["LongWelcomeMessage"]</p>
+        @if (!CurrentUser.IsAuthenticated)
+        {
+            <form method="POST">
+                <input type="submit" asp-page-handler="Login" value="LOGIN" class="btn btn-primary" />
+            </form>
+        }
+        else
+        {
+            <div>
+                <h3>Current claims:</h3>
+                <ul>
+                    @foreach (var claim in CurrentUser.GetAllClaims().OrderBy(c => c.Type))
+                    {
+                        <li>@claim.Type: <strong>@claim.Value</strong></li>
+                    }
+                </ul>
+            </div>
+        }
+        <hr />
+        <p class="text-right"><a href="https://abp.io?ref=tmpl" target="_blank">abp.io</a></p>
+    </abp-card-body>
+</abp-card>

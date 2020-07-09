@@ -1,0 +1,13 @@
+##EC03EA14839D93BA87427F340F6D3F1B##
+
+        $('#%%np-entity-name-with-dn%%LookupOpenButton').on('click', '', function () {
+            lastNpDisplayNameId = '%%np-entity-name-with-dn%%_%%np-entity-display-property%%';
+            lastNpIdId = '%%np-entity-name-with-dn%%_Id';
+            _lookupModal.open({
+                currentId: $('#%%np-entity-name-with-dn%%_Id').val(),
+                currentDisplayName: $('#%%np-entity-name-with-dn%%_%%np-entity-display-property%%').val(),
+                serviceMethod: function() {
+                    return window.%%solution-namespace-camelcase%%.controllers.%%entity-namespace-camelcase%%.%%entity-name-camelcase%%.get%%np-entity-name%%Lookup;
+                }
+            });
+        });
