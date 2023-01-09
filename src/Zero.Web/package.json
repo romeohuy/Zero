@@ -3,8 +3,8 @@
   "name": "my-app",
   "private": true,
   "dependencies": {
-    "@volo/abp.aspnetcore.mvc.ui.theme.lepton": "~3.0.3",
+    "@volo/abp.aspnetcore.mvc.ui.theme.lepton": "~7.0.0",
     "@abp/chart.js": "~3.0.3",
-    "@volo/identity": "~3.0.3"
+    "@volo/identity": "~7.0.0"
   }
 }
